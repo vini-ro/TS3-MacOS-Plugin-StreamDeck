@@ -31,6 +31,18 @@ Before using this plugin, you must enable ClientQuery in TeamSpeak 3:
 
 The ClientQuery interface allows the plugin to communicate with TeamSpeak via a local telnet connection at `127.0.0.1:25639`.
 
+### API Key Configuration (Optional but Recommended)
+
+For enhanced security, you can configure an API key for authentication:
+
+1. In TeamSpeak 3, go to **Tools** → **Options** → **Addons** → **ClientQuery**
+2. Generate or note your API key
+3. In Stream Deck, open the plugin settings (click the plugin icon in the Stream Deck software)
+4. Enter your API key in the "API Key" field
+5. The plugin will automatically reconnect using the API key
+
+**Note:** The API key is optional. The plugin will work without it, but using an API key provides better security for your TeamSpeak connection.
+
 ## Installation
 
 ### From Release
@@ -51,10 +63,12 @@ The ClientQuery interface allows the plugin to communicate with TeamSpeak via a 
    npm install
    ```
 
-3. Build the plugin:
+3. Build the plugin using the Stream Deck CLI:
    ```bash
    npm run build
    ```
+   
+   **Note:** This plugin is built using the official [Elgato Stream Deck CLI](https://docs.elgato.com/sdk/plugins/getting-started). The CLI handles the build process through Rollup and TypeScript compilation.
 
 4. Link the plugin to Stream Deck:
    ```bash
@@ -101,13 +115,16 @@ No configuration needed!
 
 ## Development
 
+This plugin is built using the official [Elgato Stream Deck CLI](https://docs.elgato.com/sdk/plugins/getting-started) and SDK.
+
 ### Project Structure
 
 ```
 ts3-macos-plugin-streamdeck/
 ├── src/
 │   ├── core/
-│   │   └── ClientQueryService.ts    # TeamSpeak ClientQuery communication
+│   │   ├── ClientQueryService.ts    # TeamSpeak ClientQuery communication
+│   │   └── ClientQueryManager.ts    # Singleton manager for ClientQuery
 │   ├── actions/
 │   │   ├── toggle-mic-mute.ts       # Microphone mute action
 │   │   ├── toggle-speakers-mute.ts  # Speakers mute action
@@ -124,17 +141,23 @@ ts3-macos-plugin-streamdeck/
 
 ### Building
 
+Build the plugin using npm (which uses the Stream Deck CLI build tools):
+
 ```bash
 npm run build
 ```
 
+This command runs Rollup to compile TypeScript and bundle the plugin.
+
 ### Development Mode (with auto-reload)
+
+Enable watch mode for automatic rebuilding and plugin restart:
 
 ```bash
 npm run watch
 ```
 
-This will automatically rebuild the plugin and restart it when files change.
+This will automatically rebuild the plugin using the Stream Deck CLI and restart it when files change.
 
 ## Technical Details
 
