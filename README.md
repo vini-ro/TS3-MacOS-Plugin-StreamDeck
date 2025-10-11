@@ -7,10 +7,15 @@ Native Stream Deck plugin for macOS that integrates with TeamSpeak 3 via ClientQ
 This plugin provides five TeamSpeak 3 actions for your Stream Deck:
 
 1. **Toggle Microphone** - Mute/unmute your microphone with visual feedback
+   - Shows different icons for active (microphone open) and muted states
 2. **Toggle Speakers** - Mute/unmute your speakers with visual feedback
+   - Shows different icons for active (speakers open) and muted states
 3. **Toggle AFK** - Set or clear Away mode with a custom message
+   - Shows different icons for active and away states
 4. **Connect Bookmark** - Quickly connect to saved TeamSpeak 3 bookmarks
 5. **Switch Channel** - Move to a specific channel with one button press
+
+**Ícones com Estados Diferentes (PT-BR):** As ações de Microfone, Speakers e AFK mostram ícones diferentes dependendo do estado atual (aberto/fechado, ativo/ausente), fornecendo feedback visual instantâneo do seu status no TeamSpeak.
 
 ## Requirements
 
@@ -37,11 +42,15 @@ For enhanced security, you can configure an API key for authentication:
 
 1. In TeamSpeak 3, go to **Tools** → **Options** → **Addons** → **ClientQuery**
 2. Generate or note your API key
-3. In Stream Deck, open the plugin settings (click the plugin icon in the Stream Deck software)
+3. In Stream Deck software, open the **plugin settings**:
+   - Click on the **gear/settings icon** in the bottom-right corner of the Stream Deck software
+   - OR right-click any TS3 action and select **"Plugin Settings"** from the menu
 4. Enter your API key in the "API Key" field
 5. The plugin will automatically reconnect using the API key
 
 **Note:** The API key is optional. The plugin will work without it, but using an API key provides better security for your TeamSpeak connection.
+
+**Nota em Português:** Para acessar as configurações do plugin no Stream Deck, clique no ícone de engrenagem no canto inferior direito do software Stream Deck, ou clique com o botão direito em qualquer ação do TS3 e selecione "Plugin Settings" (Configurações do Plugin). Lá você encontrará o campo para digitar sua API Key do TeamSpeak.
 
 ## Installation
 
