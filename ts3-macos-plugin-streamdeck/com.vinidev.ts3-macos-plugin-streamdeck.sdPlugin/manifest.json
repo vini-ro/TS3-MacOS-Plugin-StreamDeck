@@ -18,9 +18,101 @@
 					"TitleAlignment": "middle"
 				}
 			]
+		},
+		{
+			"Name": "Toggle Microphone",
+			"UUID": "com.vinidev.ts3-macos-plugin-streamdeck.toggle-mic-mute",
+			"Icon": "imgs/actions/mic/icon",
+			"Tooltip": "Toggle microphone mute in TeamSpeak 3",
+			"PropertyInspectorPath": "ui/toggle-mic-mute.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/mic/active",
+					"TitleAlignment": "bottom"
+				},
+				{
+					"Image": "imgs/actions/mic/muted",
+					"TitleAlignment": "bottom"
+				}
+			]
+		},
+		{
+			"Name": "Toggle Speakers",
+			"UUID": "com.vinidev.ts3-macos-plugin-streamdeck.toggle-speakers-mute",
+			"Icon": "imgs/actions/speakers/icon",
+			"Tooltip": "Toggle speakers mute in TeamSpeak 3",
+			"PropertyInspectorPath": "ui/toggle-speakers-mute.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/speakers/active",
+					"TitleAlignment": "bottom"
+				},
+				{
+					"Image": "imgs/actions/speakers/muted",
+					"TitleAlignment": "bottom"
+				}
+			]
+		},
+		{
+			"Name": "Toggle AFK",
+			"UUID": "com.vinidev.ts3-macos-plugin-streamdeck.toggle-afk",
+			"Icon": "imgs/actions/afk/icon",
+			"Tooltip": "Toggle AFK (Away) mode in TeamSpeak 3",
+			"PropertyInspectorPath": "ui/toggle-afk.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/afk/active",
+					"TitleAlignment": "bottom"
+				},
+				{
+					"Image": "imgs/actions/afk/away",
+					"TitleAlignment": "bottom"
+				}
+			]
+		},
+		{
+			"Name": "Connect Bookmark",
+			"UUID": "com.vinidev.ts3-macos-plugin-streamdeck.connect-bookmark",
+			"Icon": "imgs/actions/bookmark/icon",
+			"Tooltip": "Connect to a TeamSpeak 3 bookmark",
+			"PropertyInspectorPath": "ui/connect-bookmark.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/bookmark/key",
+					"TitleAlignment": "bottom"
+				}
+			]
+		},
+		{
+			"Name": "Switch Channel",
+			"UUID": "com.vinidev.ts3-macos-plugin-streamdeck.switch-channel",
+			"Icon": "imgs/actions/channel/icon",
+			"Tooltip": "Switch to a TeamSpeak 3 channel",
+			"PropertyInspectorPath": "ui/switch-channel.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/channel/key",
+					"TitleAlignment": "bottom"
+				}
+			]
 		}
 	],
-	"Category": "TS3-MacOS-Plugin-StreamDeck",
+	"Category": "TeamSpeak",
 	"CategoryIcon": "imgs/plugin/category-icon",
 	"CodePath": "bin/plugin.js",
 	"Description": "Native Stream Deck plugin for macOS that integrates with TeamSpeak 3 via ClientQuery. Control mic and speakers mute, toggle AFK mode, connect to bookmarks, and switch channels directly from your Stream Deck — no BarRaider, fully compatible and lightweight.",
