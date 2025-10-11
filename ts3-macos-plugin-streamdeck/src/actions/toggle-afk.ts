@@ -1,5 +1,5 @@
 import { action, KeyUpEvent, SingletonAction, WillAppearEvent, WillDisappearEvent } from "@elgato/streamdeck";
-import { ClientQueryService } from "../core/ClientQueryService";
+import ClientQueryManager from "../core/ClientQueryManager";
 
 /**
  * Toggle AFK (Away) mode action for TeamSpeak 3
@@ -7,27 +7,8 @@ import { ClientQueryService } from "../core/ClientQueryService";
  */
 @action({ UUID: "com.vinidev.ts3-macos-plugin-streamdeck.toggle-afk" })
 export class ToggleAFK extends SingletonAction<AFKSettings> {
-	private clientQuery: ClientQueryService;
 	private pollingInterval: NodeJS.Timeout | null = null;
 	private activeContexts = new Set<string>();
-
-	constructor() {
-		super();
-		this.clientQuery = new ClientQueryService();
-		this.initializeClientQuery();
-	}
-
-	/**
-	 * Initialize ClientQuery connection
-	 */
-	private async initializeClientQuery(): Promise<void> {
-		try {
-			await this.clientQuery.connect();
-			console.log("Connected to TeamSpeak ClientQuery");
-		} catch (error) {
-			console.error("Failed to connect to TeamSpeak ClientQuery:", error);
-		}
-	}
 
 	/**
 	 * Handle action appearing on Stream Deck
@@ -54,7 +35,9 @@ export class ToggleAFK extends SingletonAction<AFKSettings> {
 	 */
 	override async onKeyUp(ev: KeyUpEvent<AFKSettings>): Promise<void> {
 		try {
-			if (!this.clientQuery.isConnected()) {
+			const clientQuery = ClientQueryManager.getInstance();
+			
+			if (!clientQuery.isConnected()) {
 				await ev.action.showAlert();
 				await ev.action.setTitle("Not\nConnected");
 				return;
@@ -63,7 +46,7 @@ export class ToggleAFK extends SingletonAction<AFKSettings> {
 			const { settings } = ev.payload;
 			const awayMessage = settings.awayMessage || "Away";
 			
-			const isAway = await this.clientQuery.toggleAFK(awayMessage);
+			const isAway = await clientQuery.toggleAFK(awayMessage);
 			await this.updateStateValue(ev.action, isAway);
 			await ev.action.showOk();
 		} catch (error) {
@@ -77,13 +60,15 @@ export class ToggleAFK extends SingletonAction<AFKSettings> {
 	 */
 	private async updateState(action: any): Promise<void> {
 		try {
-			if (!this.clientQuery.isConnected()) {
+			const clientQuery = ClientQueryManager.getInstance();
+			
+			if (!clientQuery.isConnected()) {
 				await action.setTitle("Not\nConnected");
 				await action.setState(0);
 				return;
 			}
 
-			const isAway = await this.clientQuery.getAFKState();
+			const isAway = await clientQuery.getAFKState();
 			await this.updateStateValue(action, isAway);
 		} catch (error) {
 			console.error("Failed to update AFK state:", error);

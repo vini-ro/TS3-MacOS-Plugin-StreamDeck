@@ -1,5 +1,5 @@
 import { action, KeyUpEvent, SingletonAction, WillAppearEvent } from "@elgato/streamdeck";
-import { ClientQueryService } from "../core/ClientQueryService";
+import ClientQueryManager from "../core/ClientQueryManager";
 
 /**
  * Connect to Bookmark action for TeamSpeak 3
@@ -7,26 +7,6 @@ import { ClientQueryService } from "../core/ClientQueryService";
  */
 @action({ UUID: "com.vinidev.ts3-macos-plugin-streamdeck.connect-bookmark" })
 export class ConnectBookmark extends SingletonAction<BookmarkSettings> {
-	private clientQuery: ClientQueryService;
-
-	constructor() {
-		super();
-		this.clientQuery = new ClientQueryService();
-		this.initializeClientQuery();
-	}
-
-	/**
-	 * Initialize ClientQuery connection
-	 */
-	private async initializeClientQuery(): Promise<void> {
-		try {
-			await this.clientQuery.connect();
-			console.log("Connected to TeamSpeak ClientQuery");
-		} catch (error) {
-			console.error("Failed to connect to TeamSpeak ClientQuery:", error);
-		}
-	}
-
 	/**
 	 * Handle action appearing on Stream Deck
 	 */
@@ -41,7 +21,9 @@ export class ConnectBookmark extends SingletonAction<BookmarkSettings> {
 	 */
 	override async onKeyUp(ev: KeyUpEvent<BookmarkSettings>): Promise<void> {
 		try {
-			if (!this.clientQuery.isConnected()) {
+			const clientQuery = ClientQueryManager.getInstance();
+			
+			if (!clientQuery.isConnected()) {
 				await ev.action.showAlert();
 				await ev.action.setTitle("Not\nConnected");
 				return;
@@ -55,7 +37,7 @@ export class ConnectBookmark extends SingletonAction<BookmarkSettings> {
 				return;
 			}
 
-			await this.clientQuery.connectToBookmark(settings.bookmarkUuid, settings.password);
+			await clientQuery.connectToBookmark(settings.bookmarkUuid, settings.password);
 			await ev.action.showOk();
 		} catch (error) {
 			console.error("Failed to connect to bookmark:", error);

@@ -1,5 +1,5 @@
 import { action, KeyUpEvent, SingletonAction, WillAppearEvent, WillDisappearEvent } from "@elgato/streamdeck";
-import { ClientQueryService } from "../core/ClientQueryService";
+import ClientQueryManager from "../core/ClientQueryManager";
 
 /**
  * Toggle Microphone Mute action for TeamSpeak 3
@@ -7,27 +7,8 @@ import { ClientQueryService } from "../core/ClientQueryService";
  */
 @action({ UUID: "com.vinidev.ts3-macos-plugin-streamdeck.toggle-mic-mute" })
 export class ToggleMicMute extends SingletonAction<MicMuteSettings> {
-	private clientQuery: ClientQueryService;
 	private pollingInterval: NodeJS.Timeout | null = null;
 	private activeContexts = new Set<string>();
-
-	constructor() {
-		super();
-		this.clientQuery = new ClientQueryService();
-		this.initializeClientQuery();
-	}
-
-	/**
-	 * Initialize ClientQuery connection
-	 */
-	private async initializeClientQuery(): Promise<void> {
-		try {
-			await this.clientQuery.connect();
-			console.log("Connected to TeamSpeak ClientQuery");
-		} catch (error) {
-			console.error("Failed to connect to TeamSpeak ClientQuery:", error);
-		}
-	}
 
 	/**
 	 * Handle action appearing on Stream Deck
@@ -54,13 +35,15 @@ export class ToggleMicMute extends SingletonAction<MicMuteSettings> {
 	 */
 	override async onKeyUp(ev: KeyUpEvent<MicMuteSettings>): Promise<void> {
 		try {
-			if (!this.clientQuery.isConnected()) {
+			const clientQuery = ClientQueryManager.getInstance();
+			
+			if (!clientQuery.isConnected()) {
 				await ev.action.showAlert();
 				await ev.action.setTitle("Not\nConnected");
 				return;
 			}
 
-			const isMuted = await this.clientQuery.toggleMicMute();
+			const isMuted = await clientQuery.toggleMicMute();
 			await this.updateStateValue(ev.action, isMuted);
 			await ev.action.showOk();
 		} catch (error) {
@@ -74,13 +57,15 @@ export class ToggleMicMute extends SingletonAction<MicMuteSettings> {
 	 */
 	private async updateState(action: any): Promise<void> {
 		try {
-			if (!this.clientQuery.isConnected()) {
+			const clientQuery = ClientQueryManager.getInstance();
+			
+			if (!clientQuery.isConnected()) {
 				await action.setTitle("Not\nConnected");
 				await action.setState(0);
 				return;
 			}
 
-			const isMuted = await this.clientQuery.getMicMuteState();
+			const isMuted = await clientQuery.getMicMuteState();
 			await this.updateStateValue(action, isMuted);
 		} catch (error) {
 			console.error("Failed to update mic mute state:", error);
