@@ -42,15 +42,15 @@ For enhanced security, you can configure an API key for authentication:
 
 1. In TeamSpeak 3, go to **Tools** → **Options** → **Addons** → **ClientQuery**
 2. Generate or note your API key
-3. In Stream Deck software, open the **plugin settings**:
-   - Click on the **gear/settings icon** in the bottom-right corner of the Stream Deck software
-   - OR right-click any TS3 action and select **"Plugin Settings"** from the menu
-4. Enter your API key in the "API Key" field
+3. **When you first add any plugin action to your Stream Deck**, you'll see an API Key field at the top of the settings panel
+4. Enter your API key in that field
 5. The plugin will automatically reconnect using the API key
+
+**The API key field appears in every action's settings**, so you can easily view or change it at any time by clicking on any TS3 action button in Stream Deck.
 
 **Note:** The API key is optional. The plugin will work without it, but using an API key provides better security for your TeamSpeak connection.
 
-**Nota em Português:** Para acessar as configurações do plugin no Stream Deck, clique no ícone de engrenagem no canto inferior direito do software Stream Deck, ou clique com o botão direito em qualquer ação do TS3 e selecione "Plugin Settings" (Configurações do Plugin). Lá você encontrará o campo para digitar sua API Key do TeamSpeak.
+**Nota em Português:** Quando você adicionar qualquer ação do plugin ao seu Stream Deck pela primeira vez, verá um campo para API Key no topo do painel de configurações. O campo de API Key aparece nas configurações de todas as ações, então você pode visualizá-lo ou alterá-lo facilmente a qualquer momento clicando em qualquer botão de ação do TS3 no Stream Deck.
 
 ## Installation
 
@@ -89,25 +89,27 @@ For enhanced security, you can configure an API key for authentication:
 
 ## Usage
 
+**First-Time Setup:** When you drag any action to your Stream Deck for the first time, you'll see an **API Key field** at the top of the settings. Enter your TeamSpeak ClientQuery API key there (optional but recommended). The API key field is available in all actions, so you can change it anytime.
+
 ### Toggle Microphone / Toggle Speakers
 
 1. Drag the action to your Stream Deck
-2. Press the button to toggle mute state
-3. The button shows the current state automatically
-
-No configuration needed!
+2. (Optional) Enter your API key in the settings panel
+3. Press the button to toggle mute state
+4. The button shows the current state automatically
 
 ### Toggle AFK
 
 1. Drag the action to your Stream Deck
-2. (Optional) Configure your away message in the Property Inspector
-3. Press the button to toggle AFK mode
-4. Default message is "Away" if not configured
+2. (Optional) Enter your API key in the settings panel
+3. (Optional) Configure your away message in the Property Inspector
+4. Press the button to toggle AFK mode
+5. Default message is "Away" if not configured
 
 ### Connect Bookmark
 
 1. Drag the action to your Stream Deck
-2. Open the Property Inspector
+2. (Optional) Enter your API key in the settings panel
 3. Enter the **Bookmark UUID** (found in TeamSpeak settings)
 4. Enter a display name
 5. (Optional) Enter server password
@@ -116,7 +118,7 @@ No configuration needed!
 ### Switch Channel
 
 1. Drag the action to your Stream Deck
-2. Open the Property Inspector
+2. (Optional) Enter your API key in the settings panel
 3. Enter the **Channel ID** (you can find this in TeamSpeak client)
 4. Enter a display name
 5. (Optional) Enter channel password
