@@ -2,23 +2,8 @@
 	"Name": "TS3-MacOS-Plugin-StreamDeck",
 	"Version": "0.1.0.0",
 	"Author": "Vini.Dev",
+	"PropertyInspectorPath": "ui/plugin-settings.html",
 	"Actions": [
-		{
-			"Name": "Counter",
-			"UUID": "com.vinidev.ts3-macos-plugin-streamdeck.increment",
-			"Icon": "imgs/actions/counter/icon",
-			"Tooltip": "Displays a count, which increments by one on press.",
-			"PropertyInspectorPath": "ui/increment-counter.html",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/counter/key",
-					"TitleAlignment": "middle"
-				}
-			]
-		},
 		{
 			"Name": "Toggle Microphone",
 			"UUID": "com.vinidev.ts3-macos-plugin-streamdeck.toggle-mic-mute",

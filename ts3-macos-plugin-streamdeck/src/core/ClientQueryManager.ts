@@ -13,9 +13,6 @@ class ClientQueryManager {
 	static getInstance(): ClientQueryService {
 		if (!ClientQueryManager.instance) {
 			ClientQueryManager.instance = new ClientQueryService();
-			ClientQueryManager.instance.connect().catch((error) => {
-				console.error("Failed to connect to TeamSpeak ClientQuery:", error);
-			});
 		}
 		return ClientQueryManager.instance;
 	}
